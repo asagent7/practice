@@ -32,10 +32,9 @@ int main()
         printf("Inserting new value...\n");
         insert_sort(&head, 6);
         print_list(head);
-        /*
         printf("Deleting value 6...\n");
-        delete_node(&head, 6);
-        print_list(head);*/
+        delete_node(&head, 4);
+        print_list(head);
         destroy(head);
         return 0;
     }
@@ -138,59 +137,9 @@ void insert_sort(node** head, int insert_value)
             else
             {
                 crawler->previous->next = new;
-            }
-        }
-#if 0
-        if (crawler->previous == NULL)
-        {
-            if (crawler->value > insert_value)
-            {
-                new = (node*) malloc(sizeof(node));
-                new->value = insert_value;
-                new->previous = NULL;
-                new->next = crawler;
-                crawler->previous = new;
-                *head = new;
-            }
-            else
-            {
-                new = (node*) malloc(sizeof(node));
-                new->value = insert_value;
-                new->previous = crawler;
-                new->next = NULL;
-                crawler->next = new;
-            }
-        }
-        else if (crawler->next == NULL)
-        {
-            if (crawler->value > insert_value)
-            {
-                new = (node*) malloc(sizeof(node));
-                new->value = insert_value;
-                new->previous = crawler->previous;
-                new->next = crawler;
-                crawler->previous->next = new;
                 crawler->previous = new;
             }
-            else
-            {
-                new = (node*) malloc(sizeof(node));
-                new->value = insert_value;
-                new->previous = crawler;
-                new->next = NULL;
-                crawler->next = new;
-            }
         }
-        else
-        {
-            new = (node*) malloc(sizeof(node));
-            new->value = insert_value;
-            new->previous = crawler->previous;
-            new->next = crawler;
-            crawler->previous->next = new;
-            crawler->previous = new;
-        }
-#endif
     }
     else
     {
@@ -223,6 +172,10 @@ void delete_node(node** head, int delete_value)
             if (crawler->previous == NULL)
             {
                 *head = crawler->next;
+            }
+            else if (crawler->next == NULL)
+            {
+                crawler->previous->next = crawler->next;
             }
             else
             {
