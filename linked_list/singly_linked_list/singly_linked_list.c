@@ -18,6 +18,39 @@ void delete_node(node** head, int delete_value);
 int main()
 {
     node* head = NULL;
+    int choice;
+    int value;
+    do 
+    {
+        printf("Enter your choice :\n%d Insert\n%d Delete\n%d Quit\n", 1, 2, 3);
+
+        scanf("%d", &choice);
+
+        switch(choice)
+        {
+            case(1): printf("Enter value to be inserted:\n");
+                     scanf("%d", &value);
+                     insert_sort(&head, value);
+                     printf("List :\n");
+                     print_list(head);
+                     break;
+            case(2): printf("Enter value to be deleted:\n");
+                     scanf("%d", &value);
+                     delete_node(&head, value);
+                     printf("List :\n");
+                     print_list(head);
+                     break;
+            case(3): printf("Quitting\n");
+                     destroy(head);
+                     break;
+            default: printf("Enter correct choice\n");
+                     break;
+        }
+
+    }while(choice != 3);
+
+    return 0;
+#if 0
     insert_sort(&head, 5);
     if (head != NULL)
     {
@@ -41,7 +74,7 @@ int main()
     {
         return 1;
     }
-
+#endif
 }
 
 node* create(int insert_value)
