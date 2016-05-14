@@ -50,31 +50,6 @@ int main()
     }while(choice != 3);
 
     return 0;
-#if 0
-    insert_sort(&head, 5);
-    if (head != NULL)
-    {
-        print_list(head);
-        printf("Inserting new value...\n");
-        insert_sort(&head, 6);
-        print_list(head);
-        printf("Inserting new value...\n");
-        insert_sort(&head, 4);
-        print_list(head);
-        //printf("Inserting new value...\n");
-        //insert_sort(&head, 6);
-        //print_list(head);
-        printf("Deleting value 6...\n");
-        delete_node(&head, 6);
-        print_list(head);
-        destroy(head);
-        return 0;
-    }
-    else
-    {
-        return 1;
-    }
-#endif
 }
 
 node* create(int insert_value)
