@@ -9,11 +9,11 @@ typedef struct node
 
 node* create(int insert_value);
 void destroy(node* del_node);
-void insert_start(node** head, int insert_value);
+void insert_start(node** phead, int insert_value);
 void print_list(node* head);
-void insert_end(node** head, int insert_value);
-void insert_sort(node** head, int insert_value);
-void delete_node(node** head, int delete_value);
+void insert_end(node** phead, int insert_value);
+void insert_sort(node** phead, int insert_value);
+void delete_node(node** phead, int delete_value);
 
 int main()
 {
@@ -77,22 +77,22 @@ void destroy(node* del_node)
     }
 }
 
-void insert_start(node** head, int insert_value)
+void insert_start(node** phead, int insert_value)
 {
     node* new = (node*) malloc(sizeof(node));
 
     if (new != NULL)
     {
         new->value = insert_value;
-        new->ptr = *head;
-        *head = new;
+        new->ptr = *phead;
+        *phead = new;
     }
 }
 
-void insert_end(node** head, int insert_value)
+void insert_end(node** phead, int insert_value)
 {
     node* crawler;
-    crawler = *head;
+    crawler = *phead;
     while (crawler->ptr != NULL)
     {
         crawler = crawler->ptr;
@@ -108,10 +108,10 @@ void insert_end(node** head, int insert_value)
     }
 }
 
-void insert_sort(node** head, int insert_value)
+void insert_sort(node** phead, int insert_value)
 {
     node* new;
-    node* crawler = *head;
+    node* crawler = *phead;
     node* precrawler = NULL;
 
     if (crawler != NULL)
@@ -131,8 +131,8 @@ void insert_sort(node** head, int insert_value)
     {
         new = (node*) malloc(sizeof(node));
         new->value = insert_value;
-        new->ptr = *head;   // NULL
-        *head = new;
+        new->ptr = *phead;   // NULL
+        *phead = new;
     }
     else
     {
@@ -143,9 +143,9 @@ void insert_sort(node** head, int insert_value)
     }
 }
 
-void delete_node(node** head, int delete_value)
+void delete_node(node** phead, int delete_value)
 {
-    node* crawler = *head;
+    node* crawler = *phead;
     node* precrawler = NULL;
 
     if (crawler != NULL)
@@ -164,7 +164,7 @@ void delete_node(node** head, int delete_value)
         {
             if (precrawler == NULL)
             {
-                *head = crawler->ptr;
+                *phead = crawler->ptr;
             }
             else
             {
@@ -172,6 +172,14 @@ void delete_node(node** head, int delete_value)
             }
             free(crawler);
         }
+        else
+        {
+            printf("No such node\n");
+        }
+    }
+    else
+    {
+        printf("No such node\n");
     }
 }
 
