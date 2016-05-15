@@ -7,13 +7,13 @@ typedef struct node
     struct node* ptr;
 }node;
 
-node* create(int insert_value);
-void destroy(node* del_node);
-void insert_start(node** phead, int insert_value);
-void print_list(node* head);
-void insert_end(node** phead, int insert_value);
-void insert_sort(node** phead, int insert_value);
-void delete_node(node** phead, int delete_value);
+node* Create(int insert_value);
+void Destroy(node* del_node);
+void InsertStart(node** phead, int insert_value);
+void PrintList(node* head);
+void InsertEnd(node** phead, int insert_value);
+void InsertSort(node** phead, int insert_value);
+void DeleteNode(node** phead, int delete_value);
 
 int main()
 {
@@ -30,18 +30,18 @@ int main()
         {
             case(1): printf("Enter value to be inserted:\n");
                      scanf("%d", &value);
-                     insert_sort(&head, value);
+                     InsertSort(&head, value);
                      printf("List :\n");
-                     print_list(head);
+                     PrintList(head);
                      break;
             case(2): printf("Enter value to be deleted:\n");
                      scanf("%d", &value);
-                     delete_node(&head, value);
+                     DeleteNode(&head, value);
                      printf("List :\n");
-                     print_list(head);
+                     PrintList(head);
                      break;
             case(3): printf("Quitting\n");
-                     destroy(head);
+                     Destroy(head);
                      break;
             default: printf("Enter correct choice\n");
                      break;
@@ -52,7 +52,7 @@ int main()
     return 0;
 }
 
-node* create(int insert_value)
+node* Create(int insert_value)
 {
     node* new = (node*) malloc(sizeof(node));
 
@@ -68,16 +68,16 @@ node* create(int insert_value)
     }
 }
 
-void destroy(node* del_node)
+void Destroy(node* del_node)
 {
     if(del_node != NULL)
     {
-        destroy(del_node->ptr);
+        Destroy(del_node->ptr);
         free(del_node);
     }
 }
 
-void insert_start(node** phead, int insert_value)
+void InsertStart(node** phead, int insert_value)
 {
     node* new = (node*) malloc(sizeof(node));
 
@@ -89,7 +89,7 @@ void insert_start(node** phead, int insert_value)
     }
 }
 
-void insert_end(node** phead, int insert_value)
+void InsertEnd(node** phead, int insert_value)
 {
     node* crawler;
     crawler = *phead;
@@ -108,7 +108,7 @@ void insert_end(node** phead, int insert_value)
     }
 }
 
-void insert_sort(node** phead, int insert_value)
+void InsertSort(node** phead, int insert_value)
 {
     node* new;
     node* crawler = *phead;
@@ -127,23 +127,22 @@ void insert_sort(node** phead, int insert_value)
         }
     }
 
+    new = (node*) malloc(sizeof(node));
+    new->value = insert_value;
+
     if(precrawler == NULL)
     {
-        new = (node*) malloc(sizeof(node));
-        new->value = insert_value;
         new->ptr = *phead;   // NULL
         *phead = new;
     }
     else
     {
-        new = (node*) malloc(sizeof(node));
-        new->value = insert_value;
         new->ptr = crawler;
         precrawler->ptr = new;
     }
 }
 
-void delete_node(node** phead, int delete_value)
+void DeleteNode(node** phead, int delete_value)
 {
     node* crawler = *phead;
     node* precrawler = NULL;
@@ -183,12 +182,12 @@ void delete_node(node** phead, int delete_value)
     }
 }
 
-void print_list(node* head)
+void PrintList(node* head)
 {
     if (head != NULL)
     {
         printf("%d ", head->value);
-        print_list(head->ptr);
+        PrintList(head->ptr);
     }
     else
     {
