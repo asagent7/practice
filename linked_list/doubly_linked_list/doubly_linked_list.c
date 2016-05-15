@@ -8,44 +8,52 @@ typedef struct node
     struct node* next;
 }node;
 
-node* create(int insert_value);
-void destroy(node* del_node);
-void insert_start(node** head, int insert_value);
-void print_list(node* head);
-void insert_end(node** head, int insert_value);
-void insert_sort(node** head, int insert_value);
-void delete_node(node** head, int delete_value);
+node* Create(int insert_value);
+void Destroy(node* del_node);
+void InsertStart(node** phead, int insert_value);
+void PrintList(node* phead);
+void InsertEnd(node** phead, int insert_value);
+void InsertSort(node** phead, int insert_value);
+void DeleteNode(node** phead, int delete_value);
 
 int main()
 {
     node* head = NULL;
-    insert_sort(&head, 5);
-    if (head != NULL)
+    int choice;
+    int value;
+    do 
     {
-        print_list(head);
-        printf("Inserting new value...\n");
-        insert_sort(&head, 8);
-        print_list(head);
-        printf("Inserting new value...\n");
-        insert_sort(&head, 4);
-        print_list(head);
-        printf("Inserting new value...\n");
-        insert_sort(&head, 6);
-        print_list(head);
-        printf("Deleting value 6...\n");
-        delete_node(&head, 4);
-        print_list(head);
-        destroy(head);
-        return 0;
-    }
-    else
-    {
-        return 1;
-    }
+        printf("Enter your choice :\n%d Insert\n%d Delete\n%d Quit\n", 1, 2, 3);
 
+        scanf("%d", &choice);
+
+        switch(choice)
+        {
+            case(1): printf("Enter value to be inserted:\n");
+                     scanf("%d", &value);
+                     InsertSort(&head, value);
+                     printf("List :\n");
+                     PrintList(head);
+                     break;
+            case(2): printf("Enter value to be deleted:\n");
+                     scanf("%d", &value);
+                     DeleteNode(&head, value);
+                     printf("List :\n");
+                     PrintList(head);
+                     break;
+            case(3): printf("Quitting\n");
+                     Destroy(head);
+                     break;
+            default: printf("Enter correct choice\n");
+                     break;
+        }
+
+    }while(choice != 3);
+
+    return 0;
 }
 
-node* create(int insert_value)
+node* Create(int insert_value)
 {
     node* new = (node*) malloc(sizeof(node));
 
@@ -62,32 +70,32 @@ node* create(int insert_value)
     }
 }
 
-void destroy(node* del_node)
+void Destroy(node* del_node)
 {
     if(del_node != NULL)
     {
-        destroy(del_node->next);
+        Destroy(del_node->next);
         free(del_node);
     }
 }
 
-void insert_start(node** head, int insert_value)
+void InsertStart(node** phead, int insert_value)
 {
     node* new = (node*) malloc(sizeof(node));
 
     if (new != NULL)
     {
         new->value = insert_value;
-        new->next = *head;
+        new->next = *phead;
         new->previous = NULL;
-        *head = new;
+        *phead = new;
     }
 }
 
-void insert_end(node** head, int insert_value)
+void InsertEnd(node** phead, int insert_value)
 {
     node* crawler;
-    crawler = *head;
+    crawler = *phead;
     while (crawler->next != NULL)
     {
         crawler = crawler->next;
@@ -104,10 +112,13 @@ void insert_end(node** head, int insert_value)
     }
 }
 
-void insert_sort(node** head, int insert_value)
+void InsertSort(node** phead, int insert_value)
 {
     node* new;
-    node* crawler = *head;
+    node* crawler = *phead;
+
+    new = (node*) malloc(sizeof(node));
+    new->value = insert_value;
 
     if (crawler != NULL)
     {
@@ -118,43 +129,36 @@ void insert_sort(node** head, int insert_value)
 
         if (crawler->value < insert_value)
         {
-            new = (node*) malloc(sizeof(node));
-            new->value = insert_value;
             new->previous = crawler;
             new->next = NULL;
             crawler->next = new;
         }
         else
         {
-            new = (node*) malloc(sizeof(node));
-            new->value = insert_value;
             new->previous = crawler->previous;
             new->next = crawler;
             if(crawler->previous == NULL)
             {
-                *head = new;
+                *phead = new;
             }
             else
             {
                 crawler->previous->next = new;
-                crawler->previous = new;
             }
+            crawler->previous = new;
         }
     }
     else
     {
-        new = (node*) malloc(sizeof(node));
-        new->value = insert_value;
-        new->next = NULL;   // NULL
+        new->next = NULL;
         new->previous = NULL;
-        *head = new;
+        *phead = new;
     }
-
 }
 
-void delete_node(node** head, int delete_value)
+void DeleteNode(node** phead, int delete_value)
 {
-    node* crawler = *head;
+    node* crawler = *phead;
 
     if (crawler != NULL)
     {
@@ -169,30 +173,46 @@ void delete_node(node** head, int delete_value)
 
         if (crawler != NULL)
         {
-            if (crawler->previous == NULL)
+            if(!(crawler->previous == NULL && crawler->next == NULL))
             {
-                *head = crawler->next;
-            }
-            else if (crawler->next == NULL)
-            {
-                crawler->previous->next = crawler->next;
+                if (crawler->previous == NULL)
+                {
+                    *phead = crawler->next;
+                    crawler->next->previous = crawler->previous;
+                }
+                else if (crawler->next == NULL)
+                {
+                    crawler->previous->next = crawler->next;
+                }
+                else
+                {
+                    crawler->previous->next = crawler->next;
+                    crawler->next->previous = crawler->previous;
+                }
             }
             else
             {
-                crawler->previous->next = crawler->next;
-                crawler->next->previous = crawler->previous;
+                *phead = NULL;
             }
             free(crawler);
         }
+        else
+        {
+            printf("No such node\n");
+        }
+    }
+    else
+    {
+        printf("No such node\n");
     }
 }
 
-void print_list(node* head)
+void PrintList(node* head)
 {
     if (head != NULL)
     {
         printf("%d ", head->value);
-        print_list(head->next);
+        PrintList(head->next);
     }
     else
     {
