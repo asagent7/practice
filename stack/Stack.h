@@ -10,11 +10,11 @@ typedef struct node
     struct node* next;
 }node;
 
-void PrintStack(node* head);
+void PrintStack(node* top);
 
-void PushToStack(node** phead, int insert_value);
+void PushToStack(node** ptop, int insert_value);
 
-void PopFromStack(node** phead);
+void PopFromStack(node** ptop);
 
 void Destroy(node* del_node);
 
