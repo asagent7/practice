@@ -1,5 +1,5 @@
-#ifndef SINGLY_LINKED_LIST_H_
-#define SINGLY_LINKED_LIST_H_
+#ifndef __SINGLYLINKEDLIST_H_
+#define __SINGLYLINKEDLIST_H_
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,4 +24,4 @@ void InsertSort(node** phead, int insert_value);
 
 void DeleteNode(node** phead, int delete_value);
 
-#endif /* end of include guard: SINGLY_LINKED_LIST_H_ */
+#endif /* end of include guard: __SINGLYLINKEDLIST_H_ */
