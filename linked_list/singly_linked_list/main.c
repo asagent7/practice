@@ -1,4 +1,4 @@
-#include "singly_linked_list.h"
+#include "SinglyLinkedList.h"
 
 int main()
 {
