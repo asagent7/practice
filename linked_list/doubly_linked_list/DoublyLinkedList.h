@@ -1,5 +1,5 @@
-#ifndef DOUBLY_LINKED_LIST_H_
-#define DOUBLY_LINKED_LIST_H_
+#ifndef __DOUBLYLINKEDLIST_H_
+#define __DOUBLYLINKEDLIST_H_
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,4 +26,4 @@ void InsertSort(node** phead, int insert_value);
 void DeleteNode(node** phead, int delete_value);
 
 
-#endif /* end of include guard: DOUBLY_LINKED_LIST_H_ */
+#endif /* end of include guard: __DOUBLYLINKEDLIST_H_ */
