@@ -27,11 +27,12 @@ void PushToStack(node** ptop, int insert_value)
 
 void PopFromStack(node** ptop)
 {
-    node* crawler = (*ptop)->next;
-    
-    free(*ptop);
-
-    *ptop = crawler;
+    if (*ptop != NULL)
+    {
+        node* crawler = (*ptop)->next;
+        free(*ptop);
+        *ptop = crawler;
+    }
 }
 
 void Destroy(node* del_node)
