@@ -11,12 +11,24 @@ typedef struct node
     struct node* previous;
 }node;
 
-void PrintQueue(node* head);
+typedef struct _queue_t
+{
+    node* head;
+    node* tail;
+} queue_t;
 
-void QueueEnqueue(node** ptail, int insert_value);
+void QueueInit(queue_t* queue);
 
-void QueueDequeue(node** phead);
+void PrintHead(node* head);
 
-void Destroy(node* del_node);
+void PrintQueue(queue_t* queue);
+
+void QueueEnqueue(queue_t* queue, int insert_value);
+
+void QueueDequeue(queue_t* queue);
+
+void DestroyQueue(queue_t* queue);
+
+void DestroyHead(node* head);
 
 #endif /* end of include guard: __QUEUE_H__ */

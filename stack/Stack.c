@@ -1,11 +1,25 @@
 #include "Stack.h"
 
-void PrintStack(node* head)
+// Initialize the stack.
+void StackInit(stack_t* stack)
 {
-    if (head != NULL)
+    stack->top = NULL;
+}
+
+// Prints the stack
+void PrintStack(stack_t* stack)
+{
+    printf("Stack :\n");
+    PrintTop(stack->top);
+}
+
+// Prints the nodes from the top
+void PrintTop(node* top)
+{
+    if (top != NULL)
     {
-        printf("%d ", head->value);
-        PrintStack(head->next);
+        printf("%d ", top->value);
+        PrintTop(top->next);
     }
     else
     {
@@ -13,33 +27,42 @@ void PrintStack(node* head)
     }
 }
 
-void PushToStack(node** ptop, int insert_value)
+// Push to stack. Similar to inserting at start of linked list.
+void PushToStack(stack_t* stack, int insert_value)
 {
     node* new = (node*) malloc(sizeof(node));
 
     if (new != NULL)
     {
         new->value = insert_value;
-        new->next = *ptop;
-        *ptop = new;
+        new->next = stack->top;
+        stack->top = new;
     }
 }
 
-void PopFromStack(node** ptop)
+// Pop from stack. Similar to removing from start of linked list.
+void PopFromStack(stack_t* stack)
 {
-    if (*ptop != NULL)
+    if (stack->top != NULL)
     {
-        node* crawler = (*ptop)->next;
-        free(*ptop);
-        *ptop = crawler;
+        node* crawler = (stack->top)->next;
+        free(stack->top);
+        stack->top = crawler;
     }
 }
 
-void Destroy(node* del_node)
+// Destroy the stack.
+void DestroyStack(stack_t* stack)
+{
+    DestroyTop(stack->top);
+}
+
+// Destroy the nodes recursively.
+void DestroyTop(node* del_node)
 {
     if(del_node != NULL)
     {
-        Destroy(del_node->next);
+        DestroyTop(del_node->next);
         free(del_node);
     }
 }

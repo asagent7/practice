@@ -2,11 +2,11 @@
 
 int main()
 {
-    node* head = NULL;
-    node* tail = NULL;
+    queue_t queue;
+    QueueInit(&queue);
     int choice;
     int value;
-    do 
+    do
     {
         printf("Enter your choice :\n1. Enqueue\n2. Dequeue\n3. Quit\n");
 
@@ -16,26 +16,14 @@ int main()
         {
             case(1): printf("Enter value to be enqueued:\n");
                      scanf("%d", &value);
-                     printf("Queue :\n");
-                     QueueEnqueue(&tail, value);
-                     if (head == NULL)
-                     {
-                         head = tail;
-                     }
-                     PrintQueue(head);
+                     QueueEnqueue(&queue, value);
+                     PrintQueue(&queue);
                      break;
-            case(2): QueueDequeue(&head);
-                     if (head == NULL)
-                     {
-                         tail = head;
-                     }
-                     PrintQueue(head);
-                     printf("Queue :\n");
-                     PrintQueue(head);
+            case(2): QueueDequeue(&queue);
+                     PrintQueue(&queue);
                      break;
             case(3): printf("Quitting\n");
-                     Destroy(head);
-                     free(tail);
+                     DestroyQueue(&queue);
                      break;
             default: printf("Enter correct choice\n");
                      break;

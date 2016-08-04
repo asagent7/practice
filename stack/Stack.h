@@ -10,12 +10,23 @@ typedef struct node
     struct node* next;
 }node;
 
-void PrintStack(node* top);
+typedef struct _stack_t
+{
+    node* top;
+} stack_t;
 
-void PushToStack(node** ptop, int insert_value);
+void StackInit(stack_t* stack);
 
-void PopFromStack(node** ptop);
+void PrintTop(node* top);
 
-void Destroy(node* del_node);
+void PrintStack(stack_t* stack);
+
+void PushToStack(stack_t* stack, int insert_value);
+
+void PopFromStack(stack_t* stack);
+
+void DestroyStack(stack_t* stack);
+
+void DestroyTop(node* del_node);
 
 #endif /* end of include guard: __STACK_H__ */

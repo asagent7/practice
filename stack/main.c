@@ -2,9 +2,11 @@
 
 int main()
 {
-    node* top = NULL;
+    stack_t stack;
     int choice;
     int value;
+
+    StackInit(&stack);
     do
     {
         printf("Enter your choice :\n%d Push\n%d Pop\n%d Quit\n", 1, 2, 3);
@@ -15,16 +17,14 @@ int main()
         {
             case(1): printf("Enter value to be pushed:\n");
                      scanf("%d", &value);
-                     PushToStack(&top, value);
-                     printf("Stack :\n");
-                     PrintStack(top);
+                     PushToStack(&stack, value);
+                     PrintStack(&stack);
                      break;
-            case(2): PopFromStack(&top);
-                     printf("Stack :\n");
-                     PrintStack(top);
+            case(2): PopFromStack(&stack);
+                     PrintStack(&stack);
                      break;
             case(3): printf("Quitting\n");
-                     Destroy(top);
+                     DestroyStack(&stack);
                      break;
             default: printf("Enter correct choice\n");
                      break;
