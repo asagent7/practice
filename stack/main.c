@@ -5,7 +5,7 @@ int main()
     node* top = NULL;
     int choice;
     int value;
-    do 
+    do
     {
         printf("Enter your choice :\n%d Push\n%d Pop\n%d Quit\n", 1, 2, 3);
 
