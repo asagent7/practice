@@ -1,5 +1,7 @@
 #include "Stack.h"
 
+#ifndef STATIC
+
 // Initialize the stack.
 void StackInit(stack_t* stack)
 {
@@ -66,3 +68,50 @@ void DestroyTop(node* del_node)
         free(del_node);
     }
 }
+
+#else
+
+void StackInit(stack_t* stack)
+{
+    stack->top = STACK_EMPTY;
+}
+
+void PrintStack(stack_t* stack)
+{
+    if (stack->top != STACK_EMPTY)
+    {
+        for (int i = stack->top; i > STACK_EMPTY; i--)
+        {
+            printf("%d ", stack->data[i]);
+        }
+
+        printf("\n");
+    }
+}
+
+void PushToStack(stack_t* stack, int insert_value)
+{
+    if (stack->top < STACK_CAPACITY - 1)
+    {
+        stack->top++;
+        stack->data[stack->top] = insert_value;
+    }
+    else
+    {
+        printf("Stack Full\n");
+    }
+}
+
+void PopFromStack(stack_t* stack)
+{
+    if (stack->top != STACK_EMPTY)
+    {
+        stack->top--;
+    }
+    else
+    {
+        printf("Stack Empty\n");
+    }
+}
+
+#endif

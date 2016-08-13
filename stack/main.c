@@ -24,7 +24,9 @@ int main()
                      PrintStack(&stack);
                      break;
             case(3): printf("Quitting\n");
+#ifndef STATIC
                      DestroyStack(&stack);
+#endif
                      break;
             default: printf("Enter correct choice\n");
                      break;
