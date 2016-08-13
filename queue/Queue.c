@@ -1,5 +1,7 @@
 #include "Queue.h"
 
+#ifndef STATIC
+
 // Initialize the Queue
 void QueueInit(queue_t* queue)
 {
@@ -96,3 +98,56 @@ void DestroyHead(node* del_node)
         free(del_node);
     }
 }
+
+#else
+
+void QueueInit(queue_t* queue)
+{
+    queue->front = 0;
+    queue->size = 0;
+}
+
+void PrintQueue(queue_t* queue)
+{
+    if (queue->size != 0)
+    {
+        printf("Queue:\n");
+
+        int position;
+        for (int i = queue->size; i > 0; i--)
+        {
+            position = (queue->front + i) % QUEUE_CAPACITY;
+            printf("%d ", queue->data[position - 1]);
+        }
+
+        printf("\n");
+    }
+}
+
+void QueueEnqueue(queue_t* queue, int insert_value)
+{
+    if (queue->size < QUEUE_CAPACITY)
+    {
+        int position = (queue->front + queue->size) % QUEUE_CAPACITY;
+        queue->data[position] = insert_value;
+        queue->size++;
+    }
+    else
+    {
+        printf("Queue Full\n");
+    }
+}
+
+void QueueDequeue(queue_t* queue)
+{
+    if (queue->size > 0)
+    {
+        queue->size--;
+        queue->front = (queue->front + 1) % QUEUE_CAPACITY;
+    }
+    else
+    {
+        printf("Queue Empty\n");
+    }
+}
+#endif

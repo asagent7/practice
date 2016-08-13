@@ -80,6 +80,7 @@ void PrintStack(stack_t* stack)
 {
     if (stack->top != STACK_EMPTY)
     {
+        printf("Stack :\n");
         for (int i = stack->top; i > STACK_EMPTY; i--)
         {
             printf("%d ", stack->data[i]);

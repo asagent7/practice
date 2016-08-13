@@ -23,7 +23,9 @@ int main()
                      PrintQueue(&queue);
                      break;
             case(3): printf("Quitting\n");
+#ifndef STATIC
                      DestroyQueue(&queue);
+#endif
                      break;
             default: printf("Enter correct choice\n");
                      break;

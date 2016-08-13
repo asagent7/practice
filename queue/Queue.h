@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#ifndef STATIC
+
 typedef struct node
 {
     int value;
@@ -30,5 +32,26 @@ void QueueDequeue(queue_t* queue);
 void DestroyQueue(queue_t* queue);
 
 void DestroyHead(node* head);
+
+#else
+
+#define QUEUE_CAPACITY 64
+
+typedef struct _queue_t
+{
+    int data[QUEUE_CAPACITY];
+    int front;
+    int size;
+} queue_t;
+
+void QueueInit(queue_t* queue);
+
+void PrintQueue(queue_t* queue);
+
+void QueueEnqueue(queue_t* queue, int insert_value);
+
+void QueueDequeue(queue_t* queue);
+
+#endif
 
 #endif /* end of include guard: __QUEUE_H__ */
