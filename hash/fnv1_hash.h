@@ -8,17 +8,22 @@
 #include <stdio.h>
 #include <stdint.h>
 
-#define FNV1_32_OFFSET   (uint32_t) 2166136261
-#define FNV1_32_PRIME    (uint32_t) 16777619
+#define FNV1_32_OFFSET  (uint32_t) 2166136261
+#define FNV1_32_PRIME   (uint32_t) 16777619
 
-#define FNV1_16_MASK     (((uint32_t) 1 << 16) - 1)
+#define FNV1_16_MASK    (((uint32_t) 1 << 16) - 1)
+#define FNV1_8_MASK     (((uint32_t) 1 << 8) - 1)
 
 uint32_t fnv1_hash_32(char* string);
 
-uint32_t fnv1_hash_16(char* string);
+uint16_t fnv1_hash_16(char* string);
+
+uint8_t fnv1_hash_8(char* string);
 
 uint32_t fnv1a_hash_32(char *string);
 
-uint32_t fnv1a_hash_16(char *string);
+uint16_t fnv1a_hash_16(char *string);
+
+uint8_t fnv1a_hash_8(char* string);
 
 #endif /* end of include guard: __FNV1_HASH_H__ */
