@@ -38,6 +38,10 @@ void InsertStart(node** phead, int insert_value)
         new->value = insert_value;
         new->next = *phead;
         new->previous = NULL;
+        if (*phead != NULL)
+        {
+            (*phead)->previous = new;
+        }
         *phead = new;
     }
 }
